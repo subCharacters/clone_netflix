@@ -1,3 +1,4 @@
+import 'package:clone_netflix/screen/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clone_netflix/model/model_movie.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -30,6 +31,7 @@ class _CarouselImageState extends State<CarouselImage> {
     likes = movies.map((e) => e.like).toList();
     _currentKeyword = keywords[0];
   }
+
   // EdgeInsets는 padding,margin과 같이 크기 조정할때 자주 사용하는 클래스
   // EdgeInsets.only 특정영역에만 여백을 지정하고 싶을때 사용
   // EdgeInsets.fromLTRB 왼쪽,위,오른쪽,밑 순으로 지정이 가능
@@ -99,7 +101,17 @@ class _CarouselImageState extends State<CarouselImage> {
                   padding: EdgeInsets.only(right: 10),
                   child: Column(
                     children: <Widget>[
-                      IconButton(onPressed: () {}, icon: Icon(Icons.info)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute<Null>(
+                                fullscreenDialog: true,
+                                builder: (BuildContext context) {
+                                  return DetailScreen(
+                                    movie: movies[_currentPage],
+                                  );
+                                }));
+                          },
+                          icon: Icon(Icons.info)),
                       Text(
                         '정보',
                         style: TextStyle(fontSize: 11),

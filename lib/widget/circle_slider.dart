@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:clone_netflix/model/model_movie.dart';
 
+import '../screen/detail_screen.dart';
+
 // 상태변화가 없는 위젯이므로 StatelessWidget
 class CircleSlider extends StatelessWidget {
   // moive에서 정보를 가져와야 하므로
@@ -26,7 +28,7 @@ class CircleSlider extends StatelessWidget {
               // vertical은 위아래로 스크롤이 가능(디폴트)
               scrollDirection: Axis.horizontal,
               // makeCircleImages 함수를 만들어 사용하여 원형 이미지 위젯을 생성
-              children: makeCircleImages(movies),
+              children: makeCircleImages(context, movies),
             ),
           )
         ],
@@ -35,11 +37,19 @@ class CircleSlider extends StatelessWidget {
   }
 }
 
-List<Widget> makeCircleImages(List<Movie> movies) {
+List<Widget> makeCircleImages(BuildContext context ,List<Movie> movies) {
   List<Widget> results = [];
   for (var i = 0; i < movies.length; i++) {
     // InkWell : 클릭 가능하도록 만들어줌
-    results.add(InkWell(onTap: () {},
+    results.add(InkWell(onTap: () {
+      Navigator.of(context).push(MaterialPageRoute<Null>(
+          fullscreenDialog: true,
+          builder: (BuildContext context) {
+            return DetailScreen(
+              movie: movies[i],
+            );
+          }));
+    },
     child: Container(
       padding: EdgeInsets.only(right: 10),
       // Align : 자식 위젯을 원하는 방향으로 정리하고 싶을 때 Align 위젯을 사용하여 정렬할 수 있다.

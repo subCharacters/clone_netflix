@@ -59,7 +59,7 @@ List<Widget> makeCircleImages(BuildContext context ,List<Movie> movies) {
         // 원형 이미지를 만들어냄
         child: CircleAvatar(
           // poster파일명에 images/를 붙여놓으면 일일이 안적어도 됨..
-          backgroundImage: AssetImage('images/' + movies[i].poster),
+          backgroundImage: NetworkImage(movies[i].poster),
           radius: 48,
         ),
       ),

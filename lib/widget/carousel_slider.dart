@@ -26,7 +26,7 @@ class _CarouselImageState extends State<CarouselImage> {
     super.initState();
     // 상위 클래스인 StatefulWidget에서 가져온 movies를 참조할 수 있도록 세팅
     movies = widget.movies;
-    images = movies.map((e) => Image.asset('./images/' + e.poster)).toList();
+    images = movies.map((e) => Image.network(e.poster)).toList();
     keywords = movies.map((e) => e.keyword).toList();
     likes = movies.map((e) => e.like).toList();
     _currentKeyword = keywords[0];
@@ -73,8 +73,28 @@ class _CarouselImageState extends State<CarouselImage> {
                   children: <Widget>[
                     // 찜하기 true false 표시 제어
                     likes[_currentPage]
-                        ? IconButton(onPressed: () {}, icon: Icon(Icons.check))
-                        : IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                        ? IconButton(
+                            onPressed: () {
+                              setState(() {
+                                // 찜하기 버튼이 눌리면 현재 페이지의 찜이 트루 폴스 변경됨
+                                likes[_currentPage] = !likes[_currentPage];
+                                // 실제 데이터를 업데이트
+                                movies[_currentPage]
+                                    .reference
+                                    .update({'like': likes[_currentPage]});
+                              });
+                            },
+                            icon: Icon(Icons.check))
+                        : IconButton(
+                            onPressed: () {
+                              // 찜하기 버튼이 눌리면 현재 페이지의 찜이 트루 폴스 변경됨
+                              likes[_currentPage] = !likes[_currentPage];
+                              // 실제 데이터를 업데이트
+                              movies[_currentPage]
+                                  .reference
+                                  .update({'like': likes[_currentPage]});
+                            },
+                            icon: Icon(Icons.add)),
                     Text('내가 찜한 콘텐츠', style: TextStyle(fontSize: 11))
                   ],
                 ),

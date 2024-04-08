@@ -1,4 +1,5 @@
 import 'package:clone_netflix/screen/home_screen.dart';
+import 'package:clone_netflix/screen/like_screen.dart';
 import 'package:clone_netflix/screen/more_screen.dart';
 import 'package:clone_netflix/screen/search_screen.dart';
 import 'package:clone_netflix/widget/bottom_bar.dart';
@@ -47,11 +48,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               HomeScreen(),
               SearchScreen(),
-              Container(
-                child: Center(
-                  child: Text('save'),
-                ),
-              ),
+              LikeScreen(),
               MoreScreen(),
             ],
           ),

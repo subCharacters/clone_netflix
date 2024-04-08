@@ -1,5 +1,6 @@
 import 'package:clone_netflix/screen/home_screen.dart';
 import 'package:clone_netflix/screen/more_screen.dart';
+import 'package:clone_netflix/screen/search_screen.dart';
 import 'package:clone_netflix/widget/bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -45,11 +46,7 @@ class _MyAppState extends State<MyApp> {
           body: TabBarView(physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
               HomeScreen(),
-              Container(
-                child: Center(
-                  child: Text('search'),
-                ),
-              ),
+              SearchScreen(),
               Container(
                 child: Center(
                   child: Text('save'),
